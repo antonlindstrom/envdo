@@ -6,7 +6,6 @@ _envdo() {
   if [ "$COMP_CWORD" -eq 1 ]; then
     COMPREPLY=( $(compgen -W "$(envdo ls --plain) help add ls --gpg-recipient --version --directory" -- "$word") )
   elif [[ $COMP_CWORD -eq 2 ]]; then
-    local lastarg="${COMP_WORDS[$COMP_CWORD-1]}"
     case "${COMP_WORDS[1]}" in
       add)
         if [[ $COMP_CWORD -le 2 ]]; then

@@ -36,7 +36,7 @@ func printTree(path string) {
 	inf := tree.New(path)
 	if d, f := inf.Visit(opts); f != 0 {
 		if d > 0 {
-			d -= 1
+			d--
 		}
 		nd, nf = nd+d, nf+f
 	}

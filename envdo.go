@@ -33,12 +33,13 @@ func readFiles(path string) ([]string, error) {
 	var allFiles []string
 
 	for _, f := range files {
+		withoutSuffix := strings.TrimSuffix(f.Name(), ".gpg")
 		if f.Mode().IsDir() {
 			if strings.HasPrefix(f.Name(), ".") {
 				continue
 			}
 
-			subdirFiles, err := readFiles(path + "/" + f.Name())
+			subdirFiles, err := readFiles(path + "/" + withoutSuffix)
 			if err != nil {
 				return nil, err
 			}
@@ -48,7 +49,7 @@ func readFiles(path string) ([]string, error) {
 			continue
 		}
 
-		allFiles = append(allFiles, path+"/"+f.Name())
+		allFiles = append(allFiles, path+"/"+withoutSuffix)
 	}
 
 	return allFiles, nil
@@ -59,6 +60,9 @@ func profileName(base, path string) string {
 }
 
 func absProfilePath(path, profileName string) (string, error) {
+	if !strings.HasSuffix(profileName, ".gpg") {
+		profileName += ".gpg"
+	}
 	stat, err := os.Lstat(path)
 	if err != nil {
 		return "", err
