@@ -10,14 +10,11 @@ _envdo() {
       add)
         if [[ $COMP_CWORD -le 2 ]]; then
           COMPREPLY=($(compgen -W "$(envdo ls --plain)" -- ${word}));
+          return
         fi
         ;;
     esac
-  else
-    local command="${COMP_WORDS[1]}"
-    # TODO: load autocompletion for all other commands.
-    #local completions="$("$command")"
-    #COMPREPLY=( $(compgen -W "$completions" -- "$word") )
+    COMPREPLY=($(compgen -A function -abck -- "${word}"));
   fi
 }
 
