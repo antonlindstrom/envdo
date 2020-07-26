@@ -14,7 +14,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "envdo"
 	app.Usage = "Manage environment variables efficiently."
-	app.Version = "0.1.1"
+	app.Version = "0.1.4"
 	app.Author = "Anton Lindstrom"
 
 	homeDir, err := homedir.Dir()
